@@ -27,7 +27,7 @@ const App = {
         showOutput: ref(query.has('so')),
         outputMode: ref((query.get('om') as OutputModes) || 'preview'),
       },
-      location.hash,
+      // location.hash,
     ))
     console.info(store)
 
