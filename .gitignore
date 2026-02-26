@@ -1,7 +1,10 @@
 node_modules
 .DS_Store
-dist
+# dist
 TODOs.md
 
 # jetbrains files
 .idea
+
+# vscode files
+.vscode
