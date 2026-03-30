@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import type * as monaco from 'monaco-editor-core'
+import { computed, provide, toRefs, useTemplateRef } from 'vue'
+import EditorContainer from './editor/EditorContainer.vue'
 import EditorAndOutput from './EditorAndOutput.vue'
 import Output from './output/Output.vue'
 import { type Store, useStore } from './store'
-import { computed, provide, toRefs, useTemplateRef } from 'vue'
 import {
   type EditorComponentType,
+  type EditorMethods,
   injectKeyPreviewRef,
   injectKeyProps,
 } from './types'
-import EditorContainer from './editor/EditorContainer.vue'
-import type * as monaco from 'monaco-editor-core'
 
 export interface Props {
   theme?: 'dark' | 'light'
@@ -77,6 +78,7 @@ if (!props.editor) {
 }
 
 const outputRef = useTemplateRef('output')
+const editorContainerRef = useTemplateRef('editorContainer')
 
 props.store.init()
 
@@ -96,14 +98,19 @@ function reload() {
   outputRef.value?.reload()
 }
 
-defineExpose({ reload })
+defineExpose({
+  reload,
+  getEditorInstance: (() =>
+    editorContainerRef.value?.getEditorIns()) as EditorMethods['getEditorIns'],
+  getMonacoEditor: () => editorContainerRef.value?.getMonacoEditor?.(),
+})
 </script>
 
 <template>
   <div class="vue-repl">
     <EditorAndOutput :layout="layout" :layout-reverse="layoutReverse">
       <template v-if="showEditor" #editor>
-        <EditorContainer :editor-component="editor" />
+        <EditorContainer ref="editorContainer" :editor-component="editor" />
       </template>
       <template v-if="showOutput" #output>
         <Output
@@ -134,8 +141,9 @@ defineExpose({ reload })
   margin: 0;
   overflow: hidden;
   font-size: 13px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--bg-soft);
 }
 
