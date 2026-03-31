@@ -19,7 +19,7 @@ const onChange = (code: string) => {
 defineExpose({
   getEditorIns: (() =>
     monacoRef.value?.getEditorIns()) as EditorMethods['getEditorIns'],
-  getMonacoEditor: () => monacoRef.value?.getMonacoEditor(),
+  getMonaco: () => monacoRef.value?.getMonaco(),
 })
 </script>
 

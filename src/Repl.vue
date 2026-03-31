@@ -102,7 +102,7 @@ defineExpose({
   reload,
   getEditorInstance: (() =>
     editorContainerRef.value?.getEditorIns()) as EditorMethods['getEditorIns'],
-  getMonacoEditor: () => editorContainerRef.value?.getMonacoEditor?.(),
+  getMonaco: () => editorContainerRef.value?.getMonaco?.(),
 })
 </script>
 

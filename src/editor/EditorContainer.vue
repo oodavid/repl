@@ -40,7 +40,7 @@ watch(showMessage, () => {
 defineExpose({
   getEditorIns: (() =>
     editorRef.value?.getEditorIns?.()) as EditorMethods['getEditorIns'],
-  getMonacoEditor: () => editorRef.value?.getMonacoEditor?.(),
+  getMonaco: () => editorRef.value?.getMonaco?.(),
 })
 </script>
 

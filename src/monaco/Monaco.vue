@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
 
 defineExpose({
   getEditorIns: () => editor.value,
-  getMonacoEditor: () => monaco.editor,
+  getMonaco: () => monaco,
 })
 </script>
 

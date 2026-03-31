@@ -20,7 +20,7 @@ export interface EditorMethods {
         ? CodeMirror.Editor
         : monaco.editor.IStandaloneCodeEditor)
     | undefined
-  getMonacoEditor?(): typeof monaco.editor | undefined
+  getMonaco?(): typeof monaco | undefined
 }
 
 export type EditorComponentType = Component<EditorProps>
